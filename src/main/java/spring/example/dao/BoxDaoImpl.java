@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import spring.example.model.Box;
 import spring.example.model.Info;
 
 import javax.persistence.Query;
@@ -16,7 +17,10 @@ import java.util.List;
 public class BoxDaoImpl implements BoxDao {
     public static String type = "allType";
     public static String id = "id";
-    private SessionFactory sessionFactory;
+    public static String allInfo = "allInfo";
+
+
+    public SessionFactory sessionFactory;
 
 
     @Autowired
@@ -38,7 +42,24 @@ public class BoxDaoImpl implements BoxDao {
         session.getTransaction().commit();
     }
 
+
+    @SuppressWarnings("unchecked")
     @Transactional
+    public void addBox(Box box) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query insertQuery = session.createSQLQuery("" + "INSERT INTO Box(id,name,weight,colour)VALUES(?,?,?,?)");
+        insertQuery.setParameter(1, box.getId());
+        insertQuery.setParameter(2, box.getName());
+        insertQuery.setParameter(3, box.getWeight());
+        insertQuery.setParameter(4, box.getColour());
+        insertQuery.executeUpdate();
+        session.getTransaction().commit();
+    }
+
+
+    @Transactional
+    @SuppressWarnings("unchecked")
     public void delete(Long id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -62,13 +83,21 @@ public class BoxDaoImpl implements BoxDao {
         session.getTransaction().commit();
     }
 
-    public List<Info> getAllBoxInfo() {
-        return null;
-    }
 
     @SuppressWarnings("unchecked")
     @Transactional
     public List<Info> getInfoById(Long id) {
+        Session session = sessionFactory.openSession();
+        return session.getNamedQuery(BoxDaoImpl.id)
+                .setParameter("id", id)
+                .list();
+
+    }
+
+    @SuppressWarnings("unchecked")
+    @Transactional
+    public List<Box> getBoxesById(Long id) {
+
         Session session = sessionFactory.openSession();
         return session.getNamedQuery(BoxDaoImpl.id)
                 .setParameter("id", id)
@@ -85,6 +114,13 @@ public class BoxDaoImpl implements BoxDao {
                 .list();
     }
 
+    @SuppressWarnings("unchecked")
+    @Transactional
+    public List<Box> getBoxInfo() {
+        Session session = sessionFactory.openSession();
+        return session.getNamedQuery(BoxDaoImpl.allInfo)
+                .list();
+    }
 }
 
 

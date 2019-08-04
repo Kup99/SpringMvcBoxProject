@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring.example.dao.BoxDao;
+import spring.example.model.Box;
 import spring.example.model.Info;
 
 import java.util.List;
@@ -38,6 +39,21 @@ public class BoxServiceImpl implements BoxService {
     @Transactional
     public List<Info> getInfoByType(String type) {
         return boxDao.getInfoByType(type);
+    }
+
+    public void addBox(Box box) {
+        boxDao.addBox(box);
+    }
+
+    @Transactional
+    public List<Box> getBoxesById(Long id) {
+        return boxDao.getBoxesById(id);
+    }
+
+
+    @Transactional
+    public List<Box> getBoxInfo() {
+        return boxDao.getBoxInfo();
     }
 
 }

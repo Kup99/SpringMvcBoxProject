@@ -7,8 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import spring.example.model.Box;
 import spring.example.model.Info;
-import spring.example.model.Type;
 import spring.example.service.BoxService;
 
 @Controller
@@ -21,10 +21,38 @@ class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String openIndex(ModelMap model) {
-        model.addAttribute("type", Type.values());
-        return "index";
+        model.addAttribute("boxes", boxService.getBoxInfo());
+        return "boxes";
     }
-    
+
+
+    @RequestMapping(value = " /showBoxInfo/{id}", method = RequestMethod.GET)
+    public String showBoxInfo(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("info", boxService.getBoxesById(id));
+        return "boxInfo";
+    }
+
+
+    @RequestMapping(value = "/addBox", method = RequestMethod.GET)
+    public String getAddBoxPage() {
+        return "addBox";
+    }
+
+
+    @RequestMapping(value = "/addBox", method = RequestMethod.POST)
+    public String addBoxesEntity(Box box) {
+        boxService.addBox(box);
+        return "redirect:/";
+    }
+
+
+//
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String openIndex(ModelMap model) {
+//        model.addAttribute("type", Type.values());
+//        return "index";
+//    }
+
     @RequestMapping("/showName/{id}")
     public String getNameById(@PathVariable("id") Long id, Model model) {
         model.addAttribute("info", boxService.getInfoById(id));

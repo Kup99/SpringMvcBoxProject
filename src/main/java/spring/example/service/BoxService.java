@@ -1,6 +1,6 @@
 package spring.example.service;
 
-import org.springframework.transaction.annotation.Transactional;
+import spring.example.model.Box;
 import spring.example.model.Info;
 
 import java.util.List;
@@ -17,8 +17,11 @@ public interface BoxService {
 
     List<Info> getInfoByType(String type);
 
+    void addBox(Box box);
 
+    List<Box> getBoxesById(Long id);
 
+    List<Box> getBoxInfo();
 
 
 }
