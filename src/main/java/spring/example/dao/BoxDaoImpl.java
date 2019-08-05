@@ -16,7 +16,7 @@ import java.util.List;
 @Transactional
 public class BoxDaoImpl implements BoxDao {
     public static String type = "allType";
-    public static String id = "id";
+    public static String id = "ido";
     public static String allInfo = "allInfo";
 
 
@@ -94,16 +94,6 @@ public class BoxDaoImpl implements BoxDao {
 
     }
 
-    @SuppressWarnings("unchecked")
-    @Transactional
-    public List<Box> getBoxesById(Long id) {
-
-        Session session = sessionFactory.openSession();
-        return session.getNamedQuery(BoxDaoImpl.id)
-                .setParameter("id", id)
-                .list();
-
-    }
 
     @SuppressWarnings("unchecked")
     @Transactional
@@ -114,12 +104,28 @@ public class BoxDaoImpl implements BoxDao {
                 .list();
     }
 
+
     @SuppressWarnings("unchecked")
     @Transactional
+    public List<Box> getBoxesById(Long id) {
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from Box where id=:id");
+        query.setParameter("id",id);
+        return query.getResultList();
+
+    }
+
+
+    @SuppressWarnings("unchecked")
     public List<Box> getBoxInfo() {
         Session session = sessionFactory.openSession();
-        return session.getNamedQuery(BoxDaoImpl.allInfo)
-                .list();
+        Query query = session.createQuery("from Box p");
+        return query.getResultList();
+
+//        return session.getNamedQuery(BoxDaoImpl.id)
+//                .list();
     }
 }
 

@@ -4,10 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Box")
-@NamedNativeQueries({@NamedNativeQuery(name = "id", query = "select * from Box where id like :id",
-        resultClass = Box.class),
-        @NamedNativeQuery(name = "allInfo", query = "select * from Box ",
-                resultClass = Box.class)})
 public class Box {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

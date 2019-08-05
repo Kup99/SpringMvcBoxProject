@@ -50,8 +50,6 @@ public class BoxServiceImpl implements BoxService {
         return boxDao.getBoxesById(id);
     }
 
-
-    @Transactional
     public List<Box> getBoxInfo() {
         return boxDao.getBoxInfo();
     }

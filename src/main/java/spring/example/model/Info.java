@@ -4,10 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "INFO")
-@NamedNativeQueries({@NamedNativeQuery(name = "allType", query = "select * from Info where type like :type",
-        resultClass = Info.class),
-        @NamedNativeQuery(name = "id", query = "select * from Info where id like :id",
-                resultClass = Info.class)})
 
 public class Info {
 

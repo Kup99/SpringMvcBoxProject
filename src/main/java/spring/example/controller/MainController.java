@@ -26,10 +26,10 @@ class MainController {
     }
 
 
-    @RequestMapping(value = " /showBoxInfo/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getBoxEntity/{id}", method = RequestMethod.GET)
     public String showBoxInfo(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("info", boxService.getBoxesById(id));
-        return "boxInfo";
+        model.addAttribute("boxInfo", boxService.getBoxesById(id));
+        return "boxesInform";
     }
 
 
@@ -44,14 +44,6 @@ class MainController {
         boxService.addBox(box);
         return "redirect:/";
     }
-
-
-//
-//    @RequestMapping(value = "/", method = RequestMethod.GET)
-//    public String openIndex(ModelMap model) {
-//        model.addAttribute("type", Type.values());
-//        return "index";
-//    }
 
     @RequestMapping("/showName/{id}")
     public String getNameById(@PathVariable("id") Long id, Model model) {

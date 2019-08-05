@@ -6,7 +6,7 @@
 </head>
 <body>
 <p>Information about box</p>
-<c:forEach items="${info}" var="info">
+<c:forEach items="${info}" var="boxInfo">
     <h4>Info About : ${info.name}</h4>
     <ul>
     <li>Name:${info.name}</li>
