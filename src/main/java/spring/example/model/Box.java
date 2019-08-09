@@ -1,6 +1,9 @@
 package spring.example.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Box")
@@ -8,9 +11,10 @@ public class Box {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String colour;
-    private String weight;
     private String name;
+    @OneToOne
+    @JoinColumn(name = "info_id")
+    private Info info;
 
 
     public Box() {
@@ -25,22 +29,6 @@ public class Box {
         this.id = id;
     }
 
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
-
     public String getName() {
         return name;
     }
@@ -48,4 +36,16 @@ public class Box {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Info getInfo() {
+        return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
+    }
 }
+
+
+
+

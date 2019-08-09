@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import spring.example.model.Box;
 import spring.example.model.Info;
+import spring.example.model.Type;
 import spring.example.service.BoxService;
 
 @Controller
@@ -22,14 +23,14 @@ class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String openIndex(ModelMap model) {
         model.addAttribute("boxes", boxService.getBoxInfo());
-        return "boxes";
+        return "index";
     }
 
 
     @RequestMapping(value = "/getBoxEntity/{id}", method = RequestMethod.GET)
-    public String showBoxInfo(@PathVariable("id") Long id, Model model) {
+    public String getBoxInfo(@PathVariable("id") Long id, Model model) {
         model.addAttribute("boxInfo", boxService.getBoxesById(id));
-        return "boxesInform";
+        return "boxInfo";
     }
 
 
@@ -40,57 +41,29 @@ class MainController {
 
 
     @RequestMapping(value = "/addBox", method = RequestMethod.POST)
-    public String addBoxesEntity(Box box) {
+    public String addBox(Box box) {
         boxService.addBox(box);
         return "redirect:/";
     }
 
-    @RequestMapping("/showName/{id}")
-    public String getNameById(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("info", boxService.getInfoById(id));
-        return "show";
-    }
 
-
-    @RequestMapping("/show/{type}")
-    public String getBoxesName(@PathVariable("type") String type, Model model) {
-        model.addAttribute("info", boxService.getInfoByType(type));
-        return "showBoxesName";
-    }
-
-
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String getAddPage() {
-        return "add";
-    }
-
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addBoxesEntity(Info info) {
+    @RequestMapping(value = "/addBoxEntity", method = RequestMethod.POST)
+    public String addBoxEntity(Info info) {
+        System.out.println(info.toString());
         boxService.add(info);
-        return "redirect:/";
-    }
-
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Long id) {
-        boxService.delete(id);
-        return "redirect:/";
+       return  "redirect:/";
     }
 
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(Info info) {
-        boxService.edit(info);
-        return "redirect:/";
+    @RequestMapping("/addBoxEntity/{id}")
+    public String getAddBoxEntityPage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("entity", boxService.getBoxesById(id));
+        model.addAttribute("type", Type.values());
+        return "addBoxEntity";
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String getEditPage(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("info", boxService.getInfoById(id));
-        return "edit";
-    }
+
 }
-
 
 
 

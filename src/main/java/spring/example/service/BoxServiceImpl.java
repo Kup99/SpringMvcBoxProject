@@ -10,6 +10,7 @@ import spring.example.model.Info;
 import java.util.List;
 
 @Service
+@Transactional
 public class BoxServiceImpl implements BoxService {
 
     @Autowired
@@ -18,7 +19,6 @@ public class BoxServiceImpl implements BoxService {
     @Transactional
     public void add(Info info) {
         boxDao.add(info);
-
     }
 
     @Transactional
@@ -31,15 +31,6 @@ public class BoxServiceImpl implements BoxService {
         boxDao.edit(info);
     }
 
-    @Transactional
-    public List<Info> getInfoById(Long id) {
-        return boxDao.getInfoById(id);
-    }
-
-    @Transactional
-    public List<Info> getInfoByType(String type) {
-        return boxDao.getInfoByType(type);
-    }
 
     public void addBox(Box box) {
         boxDao.addBox(box);
@@ -54,6 +45,9 @@ public class BoxServiceImpl implements BoxService {
         return boxDao.getBoxInfo();
     }
 
+    public void insertBoxDefaultEntity() {
+        boxDao.insertBoxDefaultEntity();
+    }
 }
 
 

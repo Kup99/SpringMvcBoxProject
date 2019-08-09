@@ -24,8 +24,8 @@
 
         <select name="type" id="type">
             <c:forEach items="${Type.values}" var="type">
-                <option value="${type}">${type}</option>
-            </c:forEach>
+            <option value="${type}">${type}</option>
+        </c:forEach>
         </select>
 
         <input type="submit" value="OK">

@@ -1,6 +1,7 @@
 package spring.example.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "INFO")
@@ -9,18 +10,49 @@ public class Info {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
-    @Column(name = "NAME")
-    private String name;
-    @Column(name = "MEMORY")
-    private Integer memory;
-    @Column(name = "TYPE")
+    @Column(name = "memory")
+    private Long memory;
+    //    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
     private String type;
+    @Column(name = "colour")
+    private String colour;
+    @Column(name = "weight")
+    private Double weight;
+    @OneToOne(mappedBy = "info", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private  Box box;
+
 
 
     public Info() {
     }
+
+    public Info(Long memory, String type, String colour, Double weight, Box box) {
+        this.memory = memory;
+        this.type = type;
+        this.colour = colour;
+        this.weight = weight;
+        this.box = box;
+    }
+
+    public Box getBox() {
+        return box;
+    }
+
+    public void setBox(Box box) {
+        this.box = box;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
     public Long getId() {
         return id;
@@ -30,28 +62,41 @@ public class Info {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getMemory() {
+    public Long getMemory() {
         return memory;
     }
 
-    public void setMemory(Integer memory) {
+    public void setMemory(Long memory) {
         this.memory = memory;
     }
 
-    public String getType() {
-        return type;
+
+    public String getColour() {
+        return colour;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Info{" +
+                "id=" + id +
+                ", memory=" + memory +
+                ", type='" + type + '\'' +
+                ", colour='" + colour + '\'' +
+                ", weight=" + weight +
+                ", box=" + box +
+                '}';
     }
 }
 

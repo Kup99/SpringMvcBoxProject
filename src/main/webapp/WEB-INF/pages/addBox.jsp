@@ -40,9 +40,6 @@
         <form method="post" action="/addBox">
             <h2>Information about Server</h2>
             <p><input type="text" placeholder="name" name="name"></p>
-            <p><input type="text" placeholder="colour" name="colour"></p>
-            <p><input type="number" placeholder="id" name="id"></p>
-            <p><input type="number" placeholder="weight" name="weight"></p>
             <button type="submit"></button>
         </form>
     </div>
