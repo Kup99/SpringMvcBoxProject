@@ -9,7 +9,7 @@ public interface BoxService {
 
     void insertBoxDefaultEntity();
 
-    void add(Info info);
+    void add(Long boxId, Info info);
 
     void delete(Long id);
 
@@ -17,7 +17,7 @@ public interface BoxService {
 
     void addBox(Box box);
 
-    List<Box> getBoxesById(Long id);
+    Box getBoxesById(Long id);
 
     List<Box> getBoxInfo();
 

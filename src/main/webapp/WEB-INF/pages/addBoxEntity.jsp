@@ -5,29 +5,25 @@
 <jsp:useBean id="Type" class="spring.example.config.TypeValuesConfig"/>
 <html>
 <head>
-Title
+    Title
 </head>
 <body>
 
-<form method="post" action="/addBoxEntity">
-    <c:forEach items="${entity}" var="entity">
+<form method="post" action="/addBoxEntity/${entity.id}">
+    <h2>Information about BoxEntity</h2>
 
-        <h2>Information about BoxEntity</h2>
+    <p><input type="text" placeholder="colour" name="colour"></p>
 
-        <p><input type="text" placeholder="colour" name="colour"></p>
+    <p><input type="text" placeholder="name" name="name" value="${entity.name}"></p>
 
-        <p><input type="number" placeholder="id" name="id" value="${entity.id}"></p>
-        <p><input type="text" placeholder="name" name="name" value="${entity.name}"></p>
+    <p><input type="number" placeholder="weight" name="weight"></p>
+    <p><input type="number" placeholder="memory" name="memory"></p>
+    <select name="type" id="type">
+        <c:forEach items="${Type.values}" var="type">
+            <option value="${type}">${type}</option>
+        </c:forEach>
+    </select>
 
-        <p><input type="number" placeholder="weight" name="weight"></p>
-        <p><input type="number" placeholder="memory" name="memory"></p>
-        <select name="type" id="type">
-            <c:forEach items="${Type.values}" var="type">
-                <option value="${type}">${type}</option>
-            </c:forEach>
-        </select>
-
-    </c:forEach>
     <input type="submit" value="save">
 </form>
 </body>

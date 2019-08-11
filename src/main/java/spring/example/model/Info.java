@@ -1,7 +1,6 @@
 package spring.example.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "INFO")
@@ -9,7 +8,7 @@ import java.util.List;
 public class Info {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "memory")
@@ -21,10 +20,9 @@ public class Info {
     private String colour;
     @Column(name = "weight")
     private Double weight;
-    @OneToOne(mappedBy = "info", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private  Box box;
-
-
+    @ManyToOne
+    @JoinColumn(name = "box_id", nullable = false)
+    private Box box;
 
     public Info() {
     }
