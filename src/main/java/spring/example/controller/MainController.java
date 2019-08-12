@@ -47,11 +47,11 @@ class MainController {
     }
 
 
-    @RequestMapping(value = "/addBoxEntity", method = RequestMethod.POST)
-    public String addBoxEntity(Info info) {
+    @RequestMapping(value = "/addBoxEntity/{boxId}", method = RequestMethod.POST)
+    public String addBoxEntity(@PathVariable Long boxId, Info info) {
         System.out.println(info.toString());
-        boxService.add(info);
-       return  "redirect:/";
+        boxService.add(boxId, info);
+        return "redirect:/";
     }
 
 
@@ -61,8 +61,6 @@ class MainController {
         model.addAttribute("type", Type.values());
         return "addBoxEntity";
     }
-
-
 }
 
 

@@ -1,24 +1,24 @@
 package spring.example.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Box")
 public class Box {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne
-    @JoinColumn(name = "info_id")
-    private Info info;
-
+    @OneToMany(mappedBy = "box", fetch = FetchType.EAGER)
+    private List<Info> info;
 
     public Box() {
 
+    }
+
+    public Box(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -37,11 +37,11 @@ public class Box {
         this.name = name;
     }
 
-    public Info getInfo() {
+    public List<Info> getInfo() {
         return info;
     }
 
-    public void setInfo(Info info) {
+    public void setInfo(List<Info> info) {
         this.info = info;
     }
 }

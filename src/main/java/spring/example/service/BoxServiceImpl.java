@@ -16,28 +16,24 @@ public class BoxServiceImpl implements BoxService {
     @Autowired
     public BoxDao boxDao;
 
-    @Transactional
-    public void add(Info info) {
+    public void add(Long boxId, Info info) {
+        info.setBox(new Box(boxId));
         boxDao.add(info);
     }
 
-    @Transactional
     public void delete(Long id) {
         boxDao.delete(id);
     }
 
-    @Transactional
     public void edit(Info info) {
         boxDao.edit(info);
     }
-
 
     public void addBox(Box box) {
         boxDao.addBox(box);
     }
 
-    @Transactional
-    public List<Box> getBoxesById(Long id) {
+    public Box getBoxesById(Long id) {
         return boxDao.getBoxesById(id);
     }
 

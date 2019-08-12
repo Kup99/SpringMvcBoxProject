@@ -7,8 +7,6 @@
 <body>
 <p>Information about box</p>
 
-<c:forEach items="${boxInfo}" var="boxInfo">
-
 <h4> ${boxInfo.id}</h4>
 <h4> ${boxInfo.name}</h4>
 <%--<h4> ${boxInfo.type}</h4>--%>
@@ -19,7 +17,6 @@
 <form method="get" action="/addBoxEntity/${boxInfo.id}">
     <p><input type="submit" value=""
               style="height: 64px; width: 64px;background-image: url(/resources/add.png);"/></p>
-
-    </c:forEach>
+</form>
 </body>
 </html>

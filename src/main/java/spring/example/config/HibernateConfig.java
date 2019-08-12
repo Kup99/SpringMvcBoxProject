@@ -8,11 +8,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 @PropertySource(value = "classpath:db.properties")
 @ComponentScan({"spring.example.service", "spring.example.dao"})
 public class HibernateConfig {
@@ -30,7 +32,7 @@ public class HibernateConfig {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/db;DB_CLOSE_DELAY=-1");
+        dataSource.setUrl("jdbc:h2:~/db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
 

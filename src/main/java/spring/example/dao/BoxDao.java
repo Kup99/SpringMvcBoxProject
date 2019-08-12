@@ -17,7 +17,7 @@ public interface BoxDao {
 
     void addBox(Box box);
 
-    List<Box> getBoxesById(Long id);
+    Box getBoxesById(Long id);
 
     List<Box> getBoxInfo();
 
